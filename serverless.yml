@@ -1,0 +1,26 @@
+
+service: pyathena
+provider:
+  name: aws
+  runtime: python3.7
+  stage: sls
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "*"
+      Resource: "*"
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+functions:
+  hello:
+    handler: handler.lambda_handler
+    events:
+      - http:
+          path: /
+          method: get
+plugins:
+  - serverless-python-requirements
